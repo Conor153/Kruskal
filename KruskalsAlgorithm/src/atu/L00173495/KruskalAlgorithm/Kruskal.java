@@ -6,35 +6,55 @@ import java.util.*;
 
 //Kruskal class
 public class Kruskal {
-	//Main method
+	// Main method
+	Scanner input = new Scanner(System.in);
+
 	public static void main(String[] args) {
-		//Declare 2 constants 1 for vertices and the other for edges
-		//int V represents number of vertices
-		int V = 4;
-		//int E represents number of edges
-		int E = 5; // Number of edges
-		
-		
-		Graph graph = new Graph(V, E);
+		//Create an instance if scanner to allow user input
+		Scanner input = new Scanner(System.in);
+		//Open the scanner
+		try {
+			// Ask user for number of vertices and edges in the Kruskal
+			System.out.println("How many vertices does your graph have?");
+			int V = input.nextInt();
+			System.out.println("How many edges does your graph have?");
+			int E = input.nextInt();
+			// Create a graph with V vertices and E edges
+			Graph graph = new Graph(V, E);
+
+			System.out.println("First vertex 1 = 0");
+			System.out.println("Last vertex 1 = " + (V - 1));
+			//For every edge get the source, destination and the weight of the edge
+			for (int i = 0; i < E; i++) {
+				System.out.println("What is the source of the edge " + (i + 1) + "?");
+				int src = input.nextInt();
+				System.out.println("What is the destination of the edge " + (i + 1) + "?");
+				int dest = input.nextInt();
+				System.out.println("What is the weight of the edge ?");
+				int weight = input.nextInt();
+				graph.edges[i] = new Edge(src, dest, weight);
+
+			}
+			//Once all the edges have been identified call the kruskalMST function to identify the MST
+			graph.kruskalMST();
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally {
+			input.close();
+		}
 
 		// Add edges to the Graph
-		
-		graph.edges[0] = new Edge(0, 1, 10);
-		graph.edges[1] = new Edge(0, 2, 6);
-		graph.edges[2] = new Edge(0, 3, 5);
-		graph.edges[3] = new Edge(1, 3, 15);
-		graph.edges[4] = new Edge(2, 3, 4);
-
-		// Function call to find MST using Kruskal's algorithm
-		graph.kruskalMST();
 	}
 
-	//Edge class
-	//Represents the connections between the vertices
+	// Edge class
+	// Represents the connections between the vertices
 	public static class Edge implements Comparable<Edge> {
-		//int src is used to declare the starting vertex of the connection
-		//int dest is used to declare the vertex that the src connects to
-		//int weight is used to represent the cost of the connection.
+		// int src is used to declare the starting vertex of the connection
+		// int dest is used to declare the vertex that the src connects to
+		// int weight is used to represent the cost of the connection.
 		int src, dest, weight;
 
 		public Edge(int src, int dest, int weight) {
@@ -44,15 +64,15 @@ public class Kruskal {
 		}
 
 		// Compare two edges based on their weight
-		//This is conducted to find the most cost effective edge 
+		// This is conducted to find the most cost effective edge
 		@Override
 		public int compareTo(Edge compareEdge) {
 			return this.weight - compareEdge.weight;
 		}
 	}
-	
-	//Graph class
-	//Used to store a collection of the total number of vertices and Edges
+
+	// Graph class
+	// Used to store a collection of the total number of vertices and Edges
 	public static class Graph {
 		int V, E; // Number of vertices and edges
 		Edge[] edges; // Array to store all edges
