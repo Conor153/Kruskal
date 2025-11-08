@@ -22,10 +22,13 @@ public class Kruskal {
 			// Create a graph with V vertices and E edges
 			Graph graph = new Graph(V, E);
 
-			System.out.println("First vertex 1 = 0");
-			System.out.println("Last vertex 1 = " + (V - 1));
+
+			System.out.println("First vertex is 0");
+			System.out.println("Last vertex is " + (V - 1));
 			//For every edge get the source, destination and the weight of the edge
 			for (int i = 0; i < E; i++) {
+				System.out.println();
+				System.out.println("Edge "+(i+1)+ " of "+ E);
 				System.out.println("What is the source of the edge " + (i + 1) + "?");
 				int src = input.nextInt();
 				System.out.println("What is the destination of the edge " + (i + 1) + "?");
